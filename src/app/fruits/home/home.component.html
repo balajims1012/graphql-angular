@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row mt-2">
+    <div class="col col-md-4 offset-md-4">
+      <a class="btn btn-primary" routerLink="/add">Create A New Item</a>
+    </div>
+  </div>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of allFruits$ | async">
+      <th scope="row">{{item.id}}</th>
+      <td>{{item.name}}</td>
+      <td>{{item.quantity}}</td>
+      <td>${{item.price}}</td>
+      <td>
+        <a class="btn btn-primary" [routerLink]="['edit', item.id]">Edit</a>
+        <button class="btn btn-danger" (click)="openConfirmationModal(item.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Confirmation!</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure to delete this item?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" (click)="delete()">Confirm Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
